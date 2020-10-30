@@ -1,24 +1,58 @@
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Jasen {
     private String etunimi;
     private String sukunimi;
     private int ika;
     private int liittynyt;
-    private Koira koira;
-    // private HashMap<Saalis> saaliit;
+    private ArrayList<Koira> koirat;
+    private HashMap<String, Integer> saaliit;
 
     public Jasen(String etunimi, String sukunimi, int ika, int liittynyt) {
-        this(etunimi, sukunimi, ika, liittynyt, null);
-    }
-
-    public Jasen(String etunimi, String sukunimi, int ika, int liittynyt, Koira koira) {
         this.etunimi = etunimi;
         this.sukunimi = sukunimi;
         this.ika = ika;
         this.liittynyt = liittynyt;
-        this.koira = koira;
-        // this.saaliit = new HashMap();
+        this.koirat = new ArrayList<>();
+        this.saaliit = new HashMap();
+    }
+
+    public boolean onkoKoiria() {
+        if (!koirat.isEmpty()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void lisaaKoira(Koira koira) {
+        koirat.add(koira);
+    }
+
+    public void lisaaKaato(String saalis, int kappalemaara) {
+
+
+        saaliit.put(saalis, kappalemaara);
+
+
+    }
+
+    public void listaaKaadot() {
+        if (saaliit.isEmpty()) {
+            System.out.println("Ei kaatoja");
+        }
+
+        for (Map.Entry<String, Integer> entry : saaliit.entrySet()) {
+            String saalis = entry.getKey();
+            int lukumaara = entry.getValue();
+
+            if (lukumaara == 1) {
+                System.out.println(saalis + ", " + lukumaara + " kappale");
+            } else if (lukumaara > 1) {
+                System.out.println(saalis + ", " + lukumaara + " kappaletta");
+            }
+        }
     }
 
 
@@ -32,33 +66,24 @@ public class Jasen {
         return sukunimi;
     }
 
-    public int getIka() {
-
-        return ika;
-    }
-
-    public int getLiittynyt() {
-
-        return liittynyt;
-    }
-
-    public Koira getKoira() {
-
-        return koira;
-    }
 
     @Override
     public String toString() {
 
-        if (koira == null) {
+        if (koirat.isEmpty()) {
             return "Nimi: " + etunimi + " " + sukunimi + "\n" +
                     "Ikä: " + ika + "\n" +
                     "Koira: ei omista." + "\n" +
                     "Liittynyt seuraan vuonna " + liittynyt + "." + "\n";
         }
+        String kaikkikoirat = "";
+
+        for (Koira k : koirat) {
+            kaikkikoirat += k.toString() + "\n";
+        }
         return "Nimi: " + etunimi + " " + sukunimi + "\n" +
                 "Ikä: " + ika + "\n" +
-                "Koira: " + koira.toString() + "\n" +
+                "Koirat: " + "\n" + kaikkikoirat +
                 "Liittynyt seuraan vuonna " + liittynyt + "." + "\n";
 
     }

@@ -10,18 +10,6 @@ public class Koira {
         this.ika = ika;
     }
 
-    public String getNimi() {
-        return nimi;
-    }
-
-    public String getRotu() {
-        return rotu;
-    }
-
-    public int getIka() {
-        return ika;
-    }
-
     @Override
     public String toString() {
         return nimi + " - " + ika + "-vuotias " + rotu;

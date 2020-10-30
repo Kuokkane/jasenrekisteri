@@ -1,6 +1,4 @@
 import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class Jasenrekisteri {
@@ -9,10 +7,16 @@ public class Jasenrekisteri {
 
     public Jasenrekisteri() {
         this.jasenet = new ArrayList<>();
+
     }
 
     public void lisaa(Jasen jasen) {
         jasenet.add(jasen);
+
+    }
+
+    public void lisaaJasenelleKoira(Koira koira) {
+        jasenet.get(jasenet.size() - 1).lisaaKoira(koira);
     }
 
     public void poista(int poistettava) {
@@ -22,6 +26,7 @@ public class Jasenrekisteri {
             }
         }
     }
+
 
     public void haeTiedot(int haettava) {
         for (int i = 0; i < jasenet.size(); i++) {
@@ -40,11 +45,28 @@ public class Jasenrekisteri {
 
     public void naytaKoiralliset() {
         ArrayList<Jasen> koiralliset = jasenet.stream()
-                .filter(jasen -> jasen.getKoira() != null)
+                .filter(jasen -> jasen.onkoKoiria() == true)
                 .collect(Collectors.toCollection(ArrayList::new));
 
         koiralliset.stream()
                 .forEach(jasen -> System.out.println(jasen));
 
+    }
+
+    public void lisaaKaato(int haettava, String saalis, int maara) {
+
+        for (int i = 0; i < jasenet.size(); i++) {
+            if (i == haettava) {
+                jasenet.get(i).lisaaKaato(saalis, maara);
+            }
+        }
+    }
+
+    public void listaaKaadot(int haettava) {
+        for (int i = 0; i < jasenet.size(); i++) {
+            if (i == haettava) {
+                jasenet.get(i).listaaKaadot();
+            }
+        }
     }
 }
