@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.stream.Collectors;
 
 public class Jasenrekisteri {
@@ -56,7 +57,7 @@ public class Jasenrekisteri {
     public void lisaaKaato(int haettava, String saalis, int maara) {
 
         for (int i = 0; i < jasenet.size(); i++) {
-            if (i == haettava) {
+            if (i == haettava-1) {
                 jasenet.get(i).lisaaKaato(saalis, maara);
             }
         }
@@ -64,9 +65,29 @@ public class Jasenrekisteri {
 
     public void listaaKaadot(int haettava) {
         for (int i = 0; i < jasenet.size(); i++) {
-            if (i == haettava) {
+            if (i == haettava - 1) {
                 jasenet.get(i).listaaKaadot();
             }
         }
+    }
+
+    public void listaaKaikkiKaadot() {
+        HashMap<String, Integer> kaikkikaadot = new HashMap<>();
+        System.out.println("Seuran saaliit tähän mennessä: ");
+        for (Jasen j : jasenet) {
+            for (String saalis : j.getSaaliit().keySet()) {
+                if (kaikkikaadot.containsKey(saalis)) {
+                    kaikkikaadot.replace(saalis, kaikkikaadot.get(saalis) + j.getSaaliit().get(saalis));
+                } else if (!kaikkikaadot.containsKey(saalis)) {
+                    int maara = j.getSaaliit().get(saalis);
+                    kaikkikaadot.put(saalis, maara);
+                }
+            }
+
+        }
+
+        kaikkikaadot.entrySet().forEach(elain -> {
+            System.out.println(elain.getKey() + ": " + elain.getValue() + " kappaletta");
+        });
     }
 }

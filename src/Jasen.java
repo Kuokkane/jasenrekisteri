@@ -31,11 +31,15 @@ public class Jasen {
     }
 
     public void lisaaKaato(String saalis, int kappalemaara) {
+        if (saaliit.containsKey(saalis)) {
+            saaliit.replace(saalis, saaliit.get(saalis) + kappalemaara);
+        } else {
+            saaliit.put(saalis, kappalemaara);
+        }
+    }
 
-
-        saaliit.put(saalis, kappalemaara);
-
-
+    public HashMap<String, Integer> getSaaliit() {
+        return this.saaliit;
     }
 
     public void listaaKaadot() {

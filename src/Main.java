@@ -15,6 +15,8 @@ public class Main {
         Jasen jasen4 = new Jasen("Kalle", "Kuusisto", 29, 2004);
 
         jasen4.lisaaKaato("Hirvi", 1);
+        jasen1.lisaaKaato("Metso", 2);
+        jasen2.lisaaKaato("Metso", 1);
         jasen1.lisaaKoira(koira1);
         jasen2.lisaaKoira(koira2);
         jasen2.lisaaKoira(new Koira("Panu", "Jämntlanninpystykorva", 2));

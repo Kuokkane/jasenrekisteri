@@ -24,6 +24,18 @@ public class Kayttoliittyma {
         System.out.println("2. kaadot");
     }
 
+    public void paavalikkoInput(int komento) {
+
+
+        if (komento == 1) {
+            jasenValikko();
+        } else if (komento == 2) {
+            kaatoValikko();
+        } else {
+            System.out.println("Virheellinen valinta");
+        }
+    }
+
 
     public void jasenValikko() {
         while (true) {
@@ -85,7 +97,7 @@ public class Kayttoliittyma {
 
         }
     }
-    
+
 
     public void listaaValikko() {
         while (true) {
@@ -120,20 +132,8 @@ public class Kayttoliittyma {
     public void henkiloValikkoInput(int etsittava, int komento) {
         if (komento == 1) {
             jasenrekisteri.haeTiedot(etsittava);
-        } else if ( komento == 2) {
-            jasenrekisteri.listaaKaadot(etsittava);
-        }
-    }
-
-    public void paavalikkoInput(int komento) {
-
-
-        if (komento == 1) {
-            jasenValikko();
         } else if (komento == 2) {
-            kaatoValikko();
-        } else {
-            System.out.println("Virheellinen valinta");
+            jasenrekisteri.listaaKaadot(etsittava);
         }
     }
 
@@ -142,20 +142,30 @@ public class Kayttoliittyma {
             System.out.println("Valitse tehtävä:");
             System.out.println("0 - palaa");
             System.out.println("1 - uusi kaato");
+            System.out.println("2 - listaa jäsenen kaadot");
+            System.out.println("3 - listaa kaikki seuran kaadot");
 
             int komento = Integer.valueOf(lukija.nextLine());
 
             if (komento == 0) {
                 break;
             } else if (komento == 1) {
-                kaatoListaaValikko();
+                lisaaKaatoValikko();
+            } else if (komento == 2) {
+                listaaJasenenKaadotValikko();
+
+                int listattava = Integer.valueOf(lukija.nextLine());
+                listaaJasenenKaadotValikkoInput(listattava);
+
+            } else if (komento == 3) {
+                jasenrekisteri.listaaKaikkiKaadot();
             } else {
                 System.out.println("Virheellinen komento");
             }
         }
     }
 
-    public void kaatoListaaValikko() {
+    public void lisaaKaatoValikko() {
         System.out.println("Kelle lisätään kaato?");
         jasenrekisteri.listaa();
         int komento = Integer.valueOf(lukija.nextLine());
@@ -166,4 +176,16 @@ public class Kayttoliittyma {
 
         jasenrekisteri.lisaaKaato(komento, saalis, kappalemaara);
     }
+
+    public void listaaJasenenKaadotValikko() {
+        System.out.println("Kenen kaadot näytetään?");
+        System.out.println("0. Palaa");
+        jasenrekisteri.listaa();
+    }
+
+    public void listaaJasenenKaadotValikkoInput(int listattava) {
+        jasenrekisteri.listaaKaadot(listattava);
+    }
+
+
 }
